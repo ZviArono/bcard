@@ -1,10 +1,10 @@
 import "./App.css";
-import PageHeader from "./componets/PageHeader";
+import Bubel from "./sanbox/components/Bubel";
 
 function App() {
   return (
     <div>
-      <PageHeader />
+      <Bubel />
     </div>
   );
 }
