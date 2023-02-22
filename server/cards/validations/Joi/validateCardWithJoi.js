@@ -21,7 +21,8 @@ const validateCardWithJoi = card => {
 
     web: Joi.string()
       .ruleset.regex(urlRegex)
-      .rule({ message: 'card "web" mast be a valid url' }),
+      .rule({ message: 'card "web" mast be a valid url' })
+      .allow(""),
 
     image: Joi.object()
       .keys({
@@ -45,6 +46,7 @@ const validateCardWithJoi = card => {
     bizNumber: Joi.number().allow(""),
     user_id: Joi.string().allow(""),
   });
+
   return schema.validate(card);
 };
 

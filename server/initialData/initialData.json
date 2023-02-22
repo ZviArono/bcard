@@ -29,20 +29,6 @@
       "image": { "url": "", "alt": "" }
     },
     {
-      "name": { "first": "blogger", "last": "user" },
-      "isBusiness": true,
-      "phone": "050-0000000",
-      "email": "blogger@gmail.com",
-      "password": "Aa1234!",
-      "address": {
-        "country": "israel",
-        "city": "tel-aviv",
-        "street": "magnive",
-        "houseNumber": "5"
-      },
-      "image": { "url": "", "alt": "" }
-    },
-    {
       "name": { "first": "admin", "last": "user" },
       "isBusiness": true,
       "isAdmin": true,
