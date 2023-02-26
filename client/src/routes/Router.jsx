@@ -27,6 +27,8 @@ import A from "../sandbox/context/components/A";
 import FormTest from "./../sandbox/forms/FormTest";
 import Styles from "../sandbox/components/Styles";
 import LoginPage from "../users/pages/LoginPage";
+import FavCardsPage from "../cards/pages/FavCardsPage";
+import MyCardPage from "../cards/pages/MyCardPage";
 
 const Router = () => {
   return (
@@ -37,6 +39,8 @@ const Router = () => {
         path={`${ROUTES.CARD_DETAILS}/:cardId`}
         element={<CardDetailsPage />}
       />
+      <Route path={ROUTES.FAV_CARDS} element={<FavCardsPage />} />
+      <Route path={ROUTES.MY_CARDS} element={<MyCardPage />} />
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
       <Route path={ROUTES.SIGNUP} element={<SignupPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />

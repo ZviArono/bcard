@@ -2,12 +2,12 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Logo from "../Logo/Logo";
 import LogoIcon from "../Logo/LogoIcon";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import NavItem from "../../../../routes/components/NavItem";
 import ROUTES from "../../../../routes/routesModel";
+import { useUser } from "../../../../users/providers/UserProvider";
 
 const LeftNavBar = () => {
+  const { user } = useUser();
   return (
     <Box>
       <LogoIcon />
@@ -16,15 +16,13 @@ const LeftNavBar = () => {
       <Box sx={{ display: { xs: "none", md: "inline-flex" } }}>
         <NavItem label="about" to={ROUTES.ABOUT} />
 
-        <Button color="inherit">
-          <Typography>My Cards</Typography>
-        </Button>
+        {user && <NavItem label="Fav Cards" to={ROUTES.FAV_CARDS} />}
 
-        <Button color="inherit">
-          <Typography>Fav Cards</Typography>
-        </Button>
+        {user && user.isBusiness && (
+          <NavItem label="My Cards" to={ROUTES.MY_CARDS} />
+        )}
 
-        <NavItem label="sandbox" to={ROUTES.SANDBOX} />
+        {user && user.isAmin && <NavItem label="sandbox" to={ROUTES.SANDBOX} />}
       </Box>
     </Box>
   );

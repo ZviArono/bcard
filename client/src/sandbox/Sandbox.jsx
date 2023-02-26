@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 
 import NavItem from "../routes/components/NavItem";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { Box } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -10,15 +10,22 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 
 import DrawerListItem from "./DrawerListItem";
+import { useUser } from "../users/providers/UserProvider";
+import ROUTES from "../routes/routesModel";
 
 const Sandbox = () => {
   const [isOpen, setOpen] = useState(false);
+  const { user } = useUser();
+
+  if (!user || !user.isAdmin) return <Navigate replace to={ROUTES.CARDS} />;
+
   return (
     <>
       <AppBar position="sticky" color="transparent">
         <IconButton
           onClick={() => setOpen(true)}
-          sx={{ display: { xs: "inline-flex", md: "none" } }}>
+          sx={{ display: { xs: "inline-flex", md: "none" } }}
+        >
           <MenuIcon />
         </IconButton>
 

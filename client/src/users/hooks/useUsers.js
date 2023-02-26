@@ -30,7 +30,7 @@ const useUsers = () => {
   );
 
   const handleLogin = useCallback(
-    async user => {
+    async (user) => {
       try {
         setLoading(true);
         const token = await login(user);
@@ -46,7 +46,12 @@ const useUsers = () => {
     [navigate, requestStatus, setToken]
   );
 
-  return { isLoading, error, user, users, handleLogin };
+  const handleLogout = useCallback(() => {
+    removeToken();
+    setUser(null);
+  }, [setUser]);
+
+  return { isLoading, error, user, users, handleLogin, handleLogout };
 };
 
 export default useUsers;
