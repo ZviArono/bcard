@@ -17,9 +17,9 @@ const FormTest = () => {
     last: Joi.string().min(2).required(),
   };
 
-  const handleSubmit = data => console.log(data);
+  const handleSubmit = (data) => console.log(data);
 
-  const { value, ...rest } = useForm(INITIAL_FORM, schema, handleSubmit);
+  const { formValue, ...rest } = useForm(INITIAL_FORM, schema, handleSubmit);
 
   return (
     <Container
@@ -28,26 +28,28 @@ const FormTest = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      }}>
+      }}
+    >
       <Form
         title="Test Form"
         onSubmit={rest.onSubmit}
         onReset={rest.handleReset}
         styles={{ maxWidth: "450px" }}
         onChange={rest.validateForm}
-        to={ROUTES.SANDBOX}>
+        to={ROUTES.SANDBOX}
+      >
         <Input
           label="first name"
           name="first"
-          data={value.data}
-          error={value.errors.first}
+          data={formValue.data}
+          error={formValue.errors.first}
           onChange={rest.handleChange}
         />
         <Input
           label="last name"
           name="last"
-          data={value.data}
-          error={value.errors.last}
+          data={formValue.data}
+          error={formValue.errors.last}
           onChange={rest.handleChange}
         />
       </Form>

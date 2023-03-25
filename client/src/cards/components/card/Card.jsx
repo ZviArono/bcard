@@ -22,13 +22,13 @@ const Card = ({ card, onDelete, onLike }) => {
         <CardHead image={card.image} />
         <CardBody card={card} />
       </CardActionArea>
-
       {user && (
         <CardActionBar
           cardId={card._id}
           onDelete={onDelete}
           onLike={onLike}
           userId={card.user_id}
+          cardLikes={card.likes}
         />
       )}
     </MuiCard>

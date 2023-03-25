@@ -14,7 +14,7 @@ const LoginPage = () => {
   const { user } = useUser();
   const { handleLogin } = useUsers();
 
-  const { value, ...rest } = useForm(
+  const { formValue, ...rest } = useForm(
     initialLoginForm,
     loginSchema,
     handleLogin
@@ -29,29 +29,31 @@ const LoginPage = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      }}>
+      }}
+    >
       <Form
         onSubmit={rest.onSubmit}
         onReset={rest.handleReset}
         onChange={rest.validateForm}
         title="login"
         styles={{ maxWidth: "450px" }}
-        to={ROUTES.CARDS}>
+        to={ROUTES.CARDS}
+      >
         <Input
           label="email"
           name="email"
           type="email"
-          error={value.errors.email}
+          error={formValue.errors.email}
           onChange={rest.handleChange}
-          data={value.data}
+          data={formValue.data}
         />
         <Input
           label="password"
           name="password"
           type="password"
-          error={value.errors.password}
+          error={formValue.errors.password}
           onChange={rest.handleChange}
-          data={value.data}
+          data={formValue.data}
         />
       </Form>
     </Container>

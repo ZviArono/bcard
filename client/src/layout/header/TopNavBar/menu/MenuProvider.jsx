@@ -37,7 +37,7 @@ export const MenuProvider = ({ children }) => {
       {anchorEL && (
         <Menu
           anchorEl={anchorEL}
-          isOpen={isOpen}
+          isOpen={!!isOpen}
           onClose={() => setOpen(false)}
         />
       )}

@@ -28,7 +28,11 @@ import FormTest from "./../sandbox/forms/FormTest";
 import Styles from "../sandbox/components/Styles";
 import LoginPage from "../users/pages/LoginPage";
 import FavCardsPage from "../cards/pages/FavCardsPage";
-import MyCardPage from "../cards/pages/MyCardPage";
+import MyCardsPage from "../cards/pages/MyCardsPage";
+import UsersPage from "../users/pages/UsersPage";
+import CreateCardPage from "../cards/pages/CreateCardPage";
+import EditCardPage from "../cards/pages/EditCardPage";
+import EditUserPage from "../users/pages/EditUserPage";
 
 const Router = () => {
   return (
@@ -40,10 +44,14 @@ const Router = () => {
         element={<CardDetailsPage />}
       />
       <Route path={ROUTES.FAV_CARDS} element={<FavCardsPage />} />
-      <Route path={ROUTES.MY_CARDS} element={<MyCardPage />} />
+      <Route path={ROUTES.MY_CARDS} element={<MyCardsPage />} />
+      <Route path={ROUTES.CREATE_CARD} element={<CreateCardPage />} />
+      <Route path={`${ROUTES.EDIT_CARD}/:id`} element={<EditCardPage />} />
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
       <Route path={ROUTES.SIGNUP} element={<SignupPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+      <Route path={`${ROUTES.EDIT_USER}/:id`} element={<EditUserPage />} />
+      <Route path={ROUTES.CRM} element={<UsersPage />} />
       <Route path={ROUTES.SANDBOX} element={<Sandbox />}>
         <Route path="sandbox-components" element={<SandboxComponents />}>
           <Route path="babel" element={<Babel />} />
