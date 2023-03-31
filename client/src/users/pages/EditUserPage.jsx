@@ -10,6 +10,7 @@ import mapUserToModel from "../helpers/normalization/mapUserToModel";
 import UserEditForm from "../components/UserEditForm";
 import initialUserEditForm from "../helpers/initialForms/initialUserEditForm";
 import editUserSchema from "../models/joi-schema/editUserSchema";
+import PageHeader from "../../components/PageHeader";
 
 const EditUserPage = () => {
   const { user } = useUser();
@@ -40,24 +41,31 @@ const EditUserPage = () => {
   if (!user || user._id !== id) return <Navigate replace to={ROUTES.CARDS} />;
 
   return (
-    <Container
-      sx={{
-        paddingTop: 8,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <UserEditForm
-        title="Edit User Profile"
-        onSubmit={rest.onSubmit}
-        onReset={rest.handleReset}
-        onFormChange={rest.validateForm}
-        onInputChange={rest.handleChange}
-        data={formValue.data}
-        errors={formValue.errors}
-        setData={rest.setData}
+    <Container>
+      <PageHeader
+        title="Edit your Profile Page"
+        subtitle="Here you can edit you user account"
       />
+
+      <Container
+        sx={{
+          paddingTop: 8,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <UserEditForm
+          title="Edit User Profile"
+          onSubmit={rest.onSubmit}
+          onReset={rest.handleReset}
+          onFormChange={rest.validateForm}
+          onInputChange={rest.handleChange}
+          data={formValue.data}
+          errors={formValue.errors}
+          setData={rest.setData}
+        />
+      </Container>
     </Container>
   );
 };

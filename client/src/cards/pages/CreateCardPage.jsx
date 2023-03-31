@@ -8,6 +8,7 @@ import CardForm from "../components/CardForm";
 import useForm from "../../forms/hooks/useForm";
 import initialCardForm from "../helpers/initialForms/initialCardForm";
 import cardSchema from "../models/joi-schema/cardSchema";
+import PageHeader from "../../components/PageHeader";
 
 const CreateCardPage = (props) => {
   const { user } = useUser();
@@ -25,24 +26,31 @@ const CreateCardPage = (props) => {
   if (!user || !user.isBusiness) return <Navigate replace to={ROUTES.CARDS} />;
 
   return (
-    <Container
-      sx={{
-        paddingTop: 8,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <CardForm
-        title="create new business card"
-        onSubmit={rest.onSubmit}
-        onReset={rest.handleReset}
-        onFormChange={rest.validateForm}
-        onInputChange={rest.handleChange}
-        data={formValue.data}
-        errors={formValue.errors}
-        setData={rest.setData}
+    <Container>
+      <PageHeader
+        title="Create a new Business Card Page"
+        subtitle="Here you can create you business card"
       />
+
+      <Container
+        sx={{
+          paddingTop: 8,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CardForm
+          title="create new business card"
+          onSubmit={rest.onSubmit}
+          onReset={rest.handleReset}
+          onFormChange={rest.validateForm}
+          onInputChange={rest.handleChange}
+          data={formValue.data}
+          errors={formValue.errors}
+          setData={rest.setData}
+        />
+      </Container>
     </Container>
   );
 };

@@ -32,11 +32,31 @@ const loginUser = async ({ email, password }) => {
       if (!user)
         throw new Error("Authentication Error: Invalid email or password");
 
+      // Check if the user has exceeded the login attempts limit in the last 24 hours
+      if (
+        user.loginAttempts >= 3 &&
+        user.lastFailedAttempt &&
+        Date.now() - user.lastFailedAttempt < 24 * 60 * 60 * 1000 // 24 hours
+      )
+        throw new Error("Too many login attempts. Please try again later");
+
       const validPassword = comparePassword(password, user.password);
-      if (!validPassword)
+      if (!validPassword) {
+        // Increment the user's login attempts and update the last failed attempt timestamp
+        user.loginAttempts++;
+        user.lastFailedAttempt = Date.now();
+        await user.save();
+
         throw new Error("Authentication Error: Invalid email or password");
+      }
+
+      // Reset the user's login attempts and last failed attempt timestamp
+      user.loginAttempts = 0;
+      user.lastFailedAttempt = null;
+      await user.save();
 
       const token = generateAuthToken(user);
+
       return Promise.resolve(token);
     } catch (error) {
       error.status = 400;

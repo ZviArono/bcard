@@ -31,6 +31,8 @@ const schema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  loginAttempts: { type: Number, default: 0 },
+  lastFailedAttempt: { type: Date, default: null },
 });
 
 const User = mongoose.model("user", schema);

@@ -21,6 +21,8 @@ const normalizeUser = (user) => {
       zip: user.zip,
     },
     isBusiness: user.isBusiness,
+    loginAttempts: user.loginAttempts,
+    lastFailedAttempt: user.lastFailedAttempt,
   };
 };
 
