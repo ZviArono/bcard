@@ -15,6 +15,8 @@ const mapUserToModel = (user) => {
     houseNumber: user.address.houseNumber,
     zip: user.address.zip,
     isBusiness: user.isBusiness,
+    loginAttempts: user.loginAttempts,
+    lastFailedAttempt: user.lastFailedAttempt,
   };
 };
 

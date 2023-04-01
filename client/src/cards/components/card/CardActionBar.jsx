@@ -12,7 +12,14 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/routesModel";
 import useCards from "../../hooks/useCards";
 
-const CardActionBar = ({ cardId, onDelete, userId, onLike, cardLikes }) => {
+const CardActionBar = ({
+  cardId,
+  onDelete,
+  userId,
+  onLike,
+  cardLikes,
+  phone,
+}) => {
   const navigate = useNavigate();
   const { user } = useUser();
   const { handleLikeCard } = useCards();
@@ -60,7 +67,9 @@ const CardActionBar = ({ cardId, onDelete, userId, onLike, cardLikes }) => {
 
       <Box>
         <IconButton aria-label="call business">
-          <CallIcon />
+          <a href={`tel:${phone}`}>
+            <CallIcon />
+          </a>
         </IconButton>
         <IconButton aria-label="add to fav" onClick={handleLike}>
           <FavoriteIcon color={isLiked ? "error" : "inherit"} />
@@ -81,5 +90,6 @@ CardActionBar.propTypes = {
   onLike: func.isRequired,
   userId: string.isRequired,
   cardLikes: arrayOf(string).isRequired,
+  phone: string.isRequired,
 };
 export default CardActionBar;

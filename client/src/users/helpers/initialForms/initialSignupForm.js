@@ -14,6 +14,8 @@ const initialSignupForm = {
   houseNumber: 0,
   zip: 0,
   isBusiness: false,
+  loginAttempts: 0,
+  lastFailedAttempt: null,
 };
 
 export default initialSignupForm;

@@ -3,6 +3,7 @@ import useAxios from "../../hooks/useAxios";
 import {
   editUser,
   getUsers,
+  deleteUser,
   getUserProfile,
   login,
   signup,
@@ -17,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "./../../routes/routesModel";
 import normalizeUser from "../helpers/normalization/normalizeUser";
 import { useSearchParams } from "react-router-dom";
+import { useSnack } from "../../providers/SnackbarProvider";
 
 const useUsers = () => {
   const [users, setUsers] = useState(null);
@@ -25,23 +27,27 @@ const useUsers = () => {
   const [query, setQuery] = useState("");
   const [filteredUsers, setFilter] = useState(null);
   const [searchParams] = useSearchParams();
+  const snack = useSnack();
 
   useEffect(() => {
     setQuery(searchParams.get("q") ?? "");
   }, [searchParams]);
 
-  // useEffect(() => {
-  //   if (users) {
-  //     setFilter(
-  //       users.filter(
-  //         (user) =>
-  //           user.first.includes(query) ||
-  //           user.last.includes(query) ||
-  //           user.email.includes(query)
-  //       )
-  //     );
-  //   }
-  // }, [users, query]);
+  useEffect(() => {
+    if (users) {
+      setFilter(
+        Array.isArray(users)
+          ? users.filter(
+              (registeredUser) =>
+                registeredUser.name.first.includes(query) ||
+                registeredUser.name.last.includes(query) ||
+                registeredUser.email.includes(query) ||
+                registeredUser.phone.includes(query)
+            )
+          : []
+      );
+    }
+  }, [users, query]);
 
   useAxios();
   const navigate = useNavigate();
@@ -106,7 +112,7 @@ const useUsers = () => {
         requestStatus(false, error, null);
       }
     },
-    [requestStatus]
+    [requestStatus, user]
   );
 
   const handleGetUser = useCallback(
@@ -120,7 +126,7 @@ const useUsers = () => {
         requestStatus(false, error, null);
       }
     },
-    [requestStatus]
+    [requestStatus, user]
   );
 
   const handleGetUsers = useCallback(async () => {
@@ -131,7 +137,21 @@ const useUsers = () => {
     } catch (error) {
       requestStatus(false, error, null);
     }
-  }, [requestStatus]);
+  }, [requestStatus, user]);
+
+  const handleDeleteUser = useCallback(
+    async (userId) => {
+      try {
+        setLoading(true);
+        const registeredUser = await deleteUser(userId);
+        requestStatus(false, null, registeredUser, user);
+        snack("success", "The User has been successfully deleted");
+      } catch (error) {
+        requestStatus(false, error, null);
+      }
+    },
+    [snack, user, requestStatus]
+  );
 
   return {
     isLoading,
@@ -145,6 +165,7 @@ const useUsers = () => {
     handleEditUser,
     handleGetUsers,
     handleGetUser,
+    handleDeleteUser,
   };
 };
 

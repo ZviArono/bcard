@@ -105,7 +105,7 @@ const updateUser = async (userId, normalizedUser) => {
       return Promise.reject(error);
     }
   }
-  return Promise.resolve("card update not in mongodb");
+  return Promise.resolve("user update not in mongodb");
 };
 
 const changeUserBusinessStatus = async (userId) => {
@@ -117,19 +117,20 @@ const changeUserBusinessStatus = async (userId) => {
       return Promise.reject(error);
     }
   }
-  return Promise.resolve("card liked not in mongodb");
+  return Promise.resolve("user liked not in mongodb");
 };
 
 const deleteUser = async (userId) => {
   if (DB === "MONGODB") {
     try {
-      return Promise.resolve(`user no. ${userId} deleted!`);
+      let user = User.findByIdAndDelete(userId);
+      return Promise.resolve(user);
     } catch (error) {
       error.status = 400;
       return Promise.reject(error);
     }
   }
-  return Promise.resolve("card deleted not in mongodb");
+  return Promise.resolve("user deleted not in mongodb");
 };
 
 exports.registerUser = registerUser;
