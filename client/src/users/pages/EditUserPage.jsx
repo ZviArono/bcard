@@ -38,7 +38,8 @@ const EditUserPage = () => {
     });
   }, []);
 
-  if (!user || user._id !== id) return <Navigate replace to={ROUTES.CARDS} />;
+  if (!user || (user._id !== id && !user.isAdmin))
+    return <Navigate replace to={ROUTES.CARDS} />;
 
   return (
     <Container>

@@ -3,13 +3,14 @@ import { Box, IconButton } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { func, string } from "prop-types";
+import { func } from "prop-types";
 import { useUser } from "../../providers/UserProvider";
 import UserCardDeleteDialog from "./UserCardDeleteDialog";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/routesModel";
+import userType from "../../models/types/userType";
 
-const UserCardActionBar = ({ onDelete, registeredUserId }) => {
+const UserCardActionBar = ({ onDelete, registeredUser }) => {
   const navigate = useNavigate();
   const { user } = useUser();
   const [isDialogOpen, setDialog] = useState(false);
@@ -21,13 +22,13 @@ const UserCardActionBar = ({ onDelete, registeredUserId }) => {
 
   const handleDeleteUser = () => {
     handleDialog();
-    onDelete(registeredUserId);
+    onDelete(registeredUser._id);
   };
 
   return (
     <CardActions disableSpacing sx={{ pt: 0, justifyContent: "space-between" }}>
       <Box>
-        {user && user.isAdmin && (
+        {user && user.isAdmin && !registeredUser.isAdmin && (
           <IconButton
             aria-label="delete user"
             onClick={() => handleDialog("open")}
@@ -38,7 +39,9 @@ const UserCardActionBar = ({ onDelete, registeredUserId }) => {
         {user && user.isAdmin && (
           <IconButton
             aria-label="edit user"
-            onClick={() => navigate(`${ROUTES.EDIT_USER}/${registeredUserId}`)}
+            onClick={() =>
+              navigate(`${ROUTES.EDIT_USER}/${registeredUser._id}`)
+            }
           >
             <EditIcon />
           </IconButton>
@@ -55,7 +58,7 @@ const UserCardActionBar = ({ onDelete, registeredUserId }) => {
 };
 
 UserCardActionBar.propTypes = {
-  registeredUserId: string.isRequired,
+  registeredUser: userType.isRequired,
   onDelete: func.isRequired,
 };
 export default UserCardActionBar;

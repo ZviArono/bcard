@@ -3,6 +3,8 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import { Divider, Box, Typography } from "@mui/material";
 import userType from "../../models/types/userType";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import CheckIcon from "@mui/icons-material/Check";
 
 const UserCardBody = ({ registeredUser }) => {
   const { street, houseNumber, city } = registeredUser.address;
@@ -11,7 +13,7 @@ const UserCardBody = ({ registeredUser }) => {
     <CardContent>
       <CardHeader
         title={`${first} ${middle} ${last}`}
-        subheader={"sdsd"}
+        action={registeredUser.isAdmin && <AdminPanelSettingsIcon />}
         sx={{ p: 0, mb: 1 }}
       />
       <Divider />
@@ -27,6 +29,17 @@ const UserCardBody = ({ registeredUser }) => {
             address:{" "}
           </Typography>
           {street} {houseNumber} {city}
+        </Typography>
+        <Typography>
+          <Typography fontWeight={700} component="span">
+            email:{" "}
+          </Typography>
+          {registeredUser.email}
+        </Typography>
+        <Typography>
+          <Typography fontWeight={700} component="span">
+            business account: {registeredUser.isBusiness && <CheckIcon />}
+          </Typography>
         </Typography>
       </Box>
     </CardContent>

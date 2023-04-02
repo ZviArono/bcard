@@ -16,7 +16,7 @@ const UserCard = ({ registeredUser, onDelete }) => {
       <UserCardBody registeredUser={registeredUser} />
       {user && (
         <UserCardActionBar
-          registeredUserId={registeredUser._id}
+          registeredUser={registeredUser}
           onDelete={onDelete}
         />
       )}
