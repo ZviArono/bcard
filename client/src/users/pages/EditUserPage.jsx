@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import ROUTES from "./../../routes/routesModel";
 import { useUser } from "../providers/UserProvider";
 import Container from "@mui/material/Container";
@@ -16,7 +16,6 @@ const EditUserPage = () => {
   const { user } = useUser();
   const { users, handleEditUser, handleGetUser } = useUsers();
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const { formValue, ...rest } = useForm(
     initialUserEditForm,
@@ -25,8 +24,8 @@ const EditUserPage = () => {
       handleEditUser(id, {
         ...normalizeUser({ ...formValue.data }),
         _id: user._id,
-        email: users.email,
-        password: users.password,
+        email: user.email,
+        password: user.password,
       });
     }
   );

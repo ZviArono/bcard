@@ -12,8 +12,8 @@ const UsersCardFeedback = ({ isLoading, error, users, onDelete }) => {
   if (users && !users.length)
     return (
       <Typography variant="body1" color="initial">
-        Oops, there are no business cards in the database that match the
-        parameters you entered!
+        Oops, there are no Users in the database that match the parameters you
+        entered!
       </Typography>
     );
   if (users) return <UsersCards users={users} onDelete={onDelete} />;
