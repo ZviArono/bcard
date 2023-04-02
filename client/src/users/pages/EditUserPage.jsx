@@ -38,7 +38,7 @@ const EditUserPage = () => {
       const modeledUser = mapUserToModel(data);
       rest.setData(modeledUser);
     });
-  }, [handleGetUser, id, rest]);
+  }, [id]);
 
   if (!user || (user._id !== id && !user.isAdmin))
     return <Navigate replace to={ROUTES.CARDS} />;
