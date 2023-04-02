@@ -22,6 +22,8 @@ const editUserSchema = {
   houseNumber: Joi.number().required(),
   zip: Joi.number(),
   isBusiness: Joi.boolean().required(),
+  loginAttempts: Joi.number().required(),
+  lastFailedAttempt: Joi.date().allow(null),
 };
 
 export default editUserSchema;

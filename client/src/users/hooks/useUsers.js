@@ -103,16 +103,17 @@ const useUsers = () => {
   );
 
   const handleEditUser = useCallback(
-    async (userFromAdmin) => {
+    async (userId, userFromAdmin) => {
       try {
         setLoading(true);
-        const updatedUser = await editUser(userFromAdmin);
+        const updatedUser = await editUser(userId, userFromAdmin);
         requestStatus(false, null, updatedUser, user);
+        snack("success", "The User has been successfully updated");
       } catch (error) {
         requestStatus(false, error, null);
       }
     },
-    [requestStatus, user]
+    [requestStatus, user, snack]
   );
 
   const handleGetUser = useCallback(

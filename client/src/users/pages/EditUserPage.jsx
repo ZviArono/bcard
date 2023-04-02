@@ -23,9 +23,12 @@ const EditUserPage = () => {
     () => {
       handleEditUser(id, {
         ...normalizeUser({ ...formValue.data }),
-        _id: user._id,
-        email: user.email,
-        password: user.password,
+        _id: users._id,
+        email: users.email,
+        password: users.password,
+        loginAttempts: users.loginAttempts,
+        lastFailedAttempt: users.lastFailedAttempt,
+        isBusiness: users.isBusiness,
       });
     }
   );
@@ -35,7 +38,7 @@ const EditUserPage = () => {
       const modeledUser = mapUserToModel(data);
       rest.setData(modeledUser);
     });
-  }, []);
+  }, [handleGetUser, id, rest]);
 
   if (!user || (user._id !== id && !user.isAdmin))
     return <Navigate replace to={ROUTES.CARDS} />;

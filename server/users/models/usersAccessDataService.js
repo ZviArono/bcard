@@ -99,7 +99,14 @@ const getUser = async (userId) => {
 const updateUser = async (userId, normalizedUser) => {
   if (DB === "MONGODB") {
     try {
-      return Promise.resolve({ normalizedUser, userId });
+      let user = await User.findByIdAndUpdate(userId, normalizedUser, {
+        new: true,
+      });
+
+      if (!user)
+        throw new Error("user with this ID cannot be found in the database");
+
+      return Promise.resolve(user);
     } catch (error) {
       error.status = 400;
       return Promise.reject(error);

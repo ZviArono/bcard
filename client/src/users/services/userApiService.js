@@ -47,9 +47,9 @@ export const deleteUser = async (userId) => {
   }
 };
 
-export const editUser = async (user) => {
+export const editUser = async (userId, user) => {
   try {
-    const { data } = await axios.put(`${apiUrl}/users/${user}`);
+    const { data } = await axios.put(`${apiUrl}/users/${userId}`, user);
     return data;
   } catch (error) {
     return Promise.reject(error.message);

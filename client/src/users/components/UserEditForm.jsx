@@ -135,7 +135,13 @@ const UserEditForm = ({
             setData({ ...data, isBusiness: !!e.target.checked });
           }}
           name="isBusiness"
-          control={<Checkbox value={data.isBusiness} color="primary" />}
+          control={
+            <Checkbox
+              value={data.isBusiness}
+              checked={data.isBusiness}
+              color="primary"
+            />
+          }
           label="Signed in as a business account"
         />
       </Grid>

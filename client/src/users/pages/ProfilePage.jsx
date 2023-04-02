@@ -28,7 +28,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     handleGetUser(id);
-  }, []);
+  }, [handleGetUser, id]);
 
   if (!user) return <Navigate replace to={ROUTES.CARDS} />;
 
