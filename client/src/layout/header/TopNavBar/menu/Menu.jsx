@@ -55,6 +55,41 @@ const Menu = ({ isOpen, anchorEl, onClose }) => {
           </>
         )}
         {user && (
+          <MenuLink
+            label="Fav Cards"
+            navigateTo={ROUTES.FAV_CARDS}
+            onClick={onClose}
+            styles={{ display: { xs: "block", md: "none" } }}
+          />
+        )}
+
+        {user && user.isBusiness && (
+          <MenuLink
+            label="My Cards"
+            navigateTo={ROUTES.MY_CARDS}
+            onClick={onClose}
+            styles={{ display: { xs: "block", md: "none" } }}
+          />
+        )}
+
+        {user && user.isAdmin && (
+          <MenuLink
+            label="sandbox"
+            navigateTo={ROUTES.SANDBOX}
+            onClick={onClose}
+            styles={{ display: { xs: "block", md: "none" } }}
+          />
+        )}
+        {user && user.isAdmin && (
+          <MenuLink
+            label="crm"
+            navigateTo={ROUTES.CRM}
+            onClick={onClose}
+            styles={{ display: { xs: "block", md: "none" } }}
+          />
+        )}
+
+        {user && (
           <>
             <MenuLink
               label="profile"

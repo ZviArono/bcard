@@ -6,7 +6,7 @@ const Styles = ({ sx = {} }) => {
   // const isGreen = false;
   // const grayStyle = { backgroundColor: "gray" };
 
-  // const obj = { name: "david" };
+  // const obj = { name: "Zvi" };
   // const second = { ...obj };
   // const objX = second;
   // second.key = "3";
